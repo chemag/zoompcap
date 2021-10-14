@@ -109,7 +109,7 @@ Example of server-to-client traffic:
 
 * (2) Non-RTP Packets, starting with 0x1501000000. These packets look like some proprietary network control protocol: They are clearly not RTP, nor encrypted. In fact, the packets show little entropy (most of the content is the same byte repeated again and again). The size is almost always around 1070 bytes. They account for 28% of the packets in a given trace.
 
-![Packet Length Distribution](analysis/zoomcall_on_atlas_2.pcap.packet_size_distro.png)
+![Packet Length Distribution](analysis/atlas.zoom.pcap.packets.csv.distribution.png)
 
 Figure 1 shows the distribution of packet lengths on a given Zoom packet trace. Note the huge peak around 1070 in the distribution of packet lengths.
 
