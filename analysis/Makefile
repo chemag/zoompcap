@@ -40,10 +40,10 @@ aloha.zoom.pcap.packets.csv.distribution.txt:
 
 
 atlas.zoom.pcap.packets.csv.distribution.png: atlas.zoom.pcap.packets.csv
-	~/proj/plotty/plotty-histogram.py -d --legend-loc none --sep ',' --xcol frame.len --xlabel "packet length (bytes)" --title "Packet size distribution" --histogram-bins 1500 -i atlas.zoom.pcap.packets.csv $@
+	~/proj/plotty/plotty-histogram.py -d --legend-loc none --sep ',' --xcol frame.len --xlabel "packet length (bytes)" --ylabel "occurrences" --title "Packet size distribution" --histogram-bins 1500 -i atlas.zoom.pcap.packets.csv $@
 
 aloha.zoom.pcap.packets.csv.distribution.png: aloha.zoom.pcap.packets.csv
-	~/proj/plotty/plotty-histogram.py -d --legend-loc none --sep ',' --xcol frame.len --xlabel "packet length (bytes)" --title "Packet size distribution" --histogram-bins 1500 -i aloha.zoom.pcap.packets.csv $@
+	~/proj/plotty/plotty-histogram.py -d --legend-loc none --sep ',' --xcol frame.len --xlabel "packet length (bytes)" --ylabel "occurrences" --title "Packet size distribution" --histogram-bins 1500 -i aloha.zoom.pcap.packets.csv $@
 
 
 atlas.pcap: atlas.zoom.pcap
