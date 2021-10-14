@@ -1,0 +1,6 @@
+# non-rtp
+nonrtp_150100000000: 25211
+nonrtp_unknown: 700
+# rtp
+bede_rtp: 52668
+bede_nonrtp: 1

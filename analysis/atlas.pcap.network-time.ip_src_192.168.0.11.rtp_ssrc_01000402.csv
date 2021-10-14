@@ -1,0 +1,2 @@
+# frame_time_relative,frame_time_epoch,pkts,ploss,porder,pdups,bytes_last_interval,bitrate_last_interval,pkts_padding,frame_time_relative_mean,frame_time_relative_stdev,clock_mean,frame_time_relative_list,rtp_seq_list,rtp_timestamp_list
+0.0,1634064559.384047,3,0,0,0,393,3144,0,0.0245005,0.026312150434732617,20484.518464850793,0.0 0.043106 0.049001,11791 11792 11793,1627360 1628000 1628640
