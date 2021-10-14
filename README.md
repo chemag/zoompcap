@@ -129,7 +129,12 @@ Example of packets:
 
 
 # Requirements
-The analysis script requires a functioning `tshark` binary. Works with
+The analysis script requires:
+* a functioning `tshark` binary
+* the [rtpcap](https://github.com/chemag/rtpcap) analysis tool installed in `~/proj/`
+* the [plotty](https://github.com/chemag/plotty) plotting tool installed in `~/proj/`
+
+Works with:
 * Linux
 * Mac OS X
 
