@@ -22,6 +22,14 @@ $ sudo pip install impacket
 
 For pcapy, you need a special version (vanilla pcapy does not allow modifying the pkthdr contents. We have an open [pull request](https://github.com/helpsystems/pcapy/pull/65) for the addition, but the upstream package seems to have no activity in the last year.
 
+First remove the pip-installed version:
+
+```
+$ sudo pip uninstall pcapy
+```
+
+Second install the forked version:
+
 ```
 $ git clone https://github.com/chemag/pcapy/
 $ cd pcapy
