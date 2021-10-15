@@ -14,7 +14,7 @@ dumper = None
 dumper_full = None
 dumper_rem = None
 
-debug = 0
+debug = 2
 
 counter = 0
 
