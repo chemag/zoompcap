@@ -11,6 +11,8 @@ import impacket.ImpactDecoder
 # global variables to pass to the pcapy callback
 l2_decoder = None
 dumper = None
+dumper_full = None
+dumper_rem = None
 
 debug = 0
 
@@ -38,6 +40,8 @@ def pkt_callback(hdr, data):
             print('ethpkt: ', ethpkt)
     except impacket.ImpactPacket.ImpactPacketException:
         print('error: cannot decode packet %i' % counter)
+        if debug > 0:
+            dumper_rem.dump(hdr, data)
         return
 
     # ignore non-ip packets
@@ -45,6 +49,8 @@ def pkt_callback(hdr, data):
         if debug > 0:
             print('info: non-ip packet (ethertype: 0x%04x)' %
                   ethpkt.get_ether_type())
+        if debug > 0:
+            dumper_rem.dump(hdr, data)
         return
 
     # ignore non-udp packets
@@ -57,6 +63,8 @@ def pkt_callback(hdr, data):
     if proto != 17:
         if debug > 1:
             print('info: non-udp packet (ip.proto: 0x%02x)' % proto)
+        if debug > 0:
+            dumper_rem.dump(hdr, data)
         return
 
     # get the UDP payload
@@ -71,6 +79,8 @@ def pkt_callback(hdr, data):
         if debug > 1:
             udppayload_bin_str = printf_payload(udppayload_bin, 4)
             print('info: non-bede packet (payload: %s)' % udppayload_bin_str)
+        if debug > 0:
+            dumper_rem.dump(hdr, data)
         return
 
     bede_index = udppayload_bin.index(b'\xbe\xde')
@@ -83,7 +93,13 @@ def pkt_callback(hdr, data):
         if debug > 1:
             udppayload_bin_str = printf_payload(udppayload_bin, 4)
             print('info: non-rtp packet (payload: %s)' % udppayload_bin_str)
+        if debug > 0:
+            dumper_rem.dump(hdr, data)
         return
+
+    # store a copy of the original packet
+    if debug > 1:
+        dumper_full.dump(hdr, data)
 
     # look for the generic RTP header extension marker
     zhdr_len = rtp_index
@@ -112,6 +128,8 @@ def pkt_callback(hdr, data):
 def main(argv):
     global l2_decoder
     global dumper
+    global dumper_rem
+    global dumper_full
 
     # assume `./filter.py in.pcap out.pcap`
     infile = sys.argv[1]
@@ -128,8 +146,12 @@ def main(argv):
         print('unknown datalink: %i' % datalink)
         sys.exit(-1)
 
-    # set output file
+    # set output file(s)
     dumper = pc.dump_open(outfile)
+    if debug > 0:
+        dumper_rem = pc.dump_open(outfile + '.rem.pcap')
+    if debug > 1:
+        dumper_full = pc.dump_open(outfile + '.full.pcap')
 
     # loop through all the packets
     packet_limit = -1  # infinite
