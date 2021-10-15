@@ -36,6 +36,16 @@ $ cd pcapy
 $ sudo python setup.py install
 ```
 
+Make sure that you are using the right version:
+
+```
+$ pip list |grep pcapy
+pcapy                         0.11.5.dev0
+```
+
+Note that this 0.11.5 is the latest version in pcapy right now.
+
+
 ## 2.2. Running
 
 In order to remove the Zoom header from `test/zoom01.pcap`, use:
