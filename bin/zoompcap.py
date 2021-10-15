@@ -133,7 +133,15 @@ def main(argv):
 
     # loop through all the packets
     packet_limit = -1  # infinite
-    pc.loop(packet_limit, pkt_callback)  # capture packets
+    try:
+        pc.loop(packet_limit, pkt_callback)  # capture packets
+    except pcapy.PcapError as ee:
+        if 'truncated dump file' in ee.args[0]:
+            # truncated file: ignore the issue
+            pass
+        else:
+            raise
+
 
 
 if __name__ == "__main__":
